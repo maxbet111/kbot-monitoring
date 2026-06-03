@@ -32,7 +32,7 @@ spec:
               prefix: index_
               period: 24h
 
-      # Переводимо ВСІ внутрішні сервіси з мережі (memberlist) на локальну пам'ять (inmemory)
+      # Правильний синтаксис кілець для версії 2.9.6
       ingester:
         lifecycler:
           ring:
@@ -47,10 +47,9 @@ spec:
           kvstore:
             store: inmemory
 
-      # Конфігуруємо компактор працювати миттєво без очікування в 10 хвилин
+      # Використовуємо правильне ім'я поля compactor_ring
       compactor:
-        first_compaction_delay: 0s
-        ring:
+        compactor_ring:
           kvstore:
             store: inmemory
 
