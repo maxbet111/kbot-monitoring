@@ -13,6 +13,10 @@ spec:
         name: open-telemetry
         namespace: monitoring
   values:
-    # Вимикаємо admission webhooks, щоб оператор працював у dev-кластері без Cert-Manager
     admissionWebhooks:
-      create: false
+      enabled: true
+      # Вимикаємо залежність від cert-manager
+      certManager:
+        enabled: false
+      # Змушуємо Helm самому згенерувати сертифікати для вебхука
+      autoGenerateCert: true
