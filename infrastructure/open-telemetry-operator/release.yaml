@@ -14,9 +14,10 @@ spec:
         namespace: monitoring
   values:
     admissionWebhooks:
-      enabled: true
-      # Вимикаємо залежність від cert-manager
+      # Замість enabled використовуємо create
+      create: true
       certManager:
         enabled: false
-      # Змушуємо Helm самому згенерувати сертифікати для вебхука
-      autoGenerateCert: true
+      # Перетворюємо булеве значення на об'єкт, як просить схема
+      autoGenerateCert:
+        enabled: true
