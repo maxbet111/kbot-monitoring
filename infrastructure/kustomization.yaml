@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - namespace.yaml
+  - sources/helm-repositories.yaml
+  - open-telemetry-operator/release.yaml
+  - fluent-bit/release.yaml
+  - loki/release.yaml
+  - prometheus/release.yaml
