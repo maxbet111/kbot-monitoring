@@ -14,7 +14,6 @@ spec:
         name: grafana
         namespace: monitoring
   values:
-    # Перемикаємо архітектуру з мікросервісів на один под
     deploymentMode: SingleBinary
 
     loki:
@@ -33,13 +32,18 @@ spec:
               prefix: index_
               period: 24h
 
-    # Налаштування для монолітного пода
     singleBinary:
       replicas: 1
       persistence:
-        enabled: false # не створюємо важкі хмарні диски
+        enabled: false
+      # Створюємо тимчасовий буфер, куди Loki зможе вільно писати
+      extraVolumes:
+        - name: loki-scratch
+          emptyDir: {}
+      extraVolumeMounts:
+        - name: loki-scratch
+          mountPath: /var/loki
 
-    # Вимикаємо непотрібні кеші, щоб не їсти оперативну пам'ять кластера
     resultsCache:
       enabled: false
     chunksCache:
