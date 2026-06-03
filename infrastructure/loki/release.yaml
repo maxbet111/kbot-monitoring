@@ -32,11 +32,32 @@ spec:
               prefix: index_
               period: 24h
 
+      # Переводимо ВСІ внутрішні сервіси з мережі (memberlist) на локальну пам'ять (inmemory)
+      ingester:
+        lifecycler:
+          ring:
+            kvstore:
+              store: inmemory
+      distributor:
+        ring:
+          kvstore:
+            store: inmemory
+      ruler:
+        ring:
+          kvstore:
+            store: inmemory
+
+      # Конфігуруємо компактор працювати миттєво без очікування в 10 хвилин
+      compactor:
+        first_compaction_delay: 0s
+        ring:
+          kvstore:
+            store: inmemory
+
     singleBinary:
       replicas: 1
       persistence:
         enabled: false
-      # Створюємо тимчасовий буфер, куди Loki зможе вільно писати
       extraVolumes:
         - name: loki-scratch
           emptyDir: {}
