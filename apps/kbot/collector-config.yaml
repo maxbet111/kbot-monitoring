@@ -1,15 +1,10 @@
 apiVersion: opentelemetry.io/v1beta1
-kind: Namespace
-metadata:
-  name: monitoring
----
-apiVersion: opentelemetry.io/v1beta1
 kind: OpenTelemetryCollector
 metadata:
   name: kbot-collector
   namespace: monitoring
 spec:
-  mode: deployment # <--- ЯВНО ДОДАЄМО ЦЕЙ РЯДОК ДЛЯ ВЕБХУКА
+  mode: deployment
   config:
     receivers:
       otlp:
