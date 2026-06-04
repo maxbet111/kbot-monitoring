@@ -22,3 +22,10 @@
      --branch=main \
      --path=clusters/dev \
      --personal
+
+----
+## 📊 Моніторинг та Візуалізація (Grafana)
+
+Для перегляду метрик та логів інфраструктури розгорнуто Grafana дашборд:
+
+* 🛠️ http://localhost:3000/goto/bfo4wn1xjr6dce?orgId=1) — доступне після виконання команди `kubectl port-forward svc/grafana -n monitoring 3000:80`.
